@@ -1,0 +1,37 @@
+export class AppError extends Error {
+  public readonly statusCode: number;
+  public readonly success: boolean;
+
+  constructor(message: string, statusCode: number = 400) {
+    super(message);
+    this.statusCode = statusCode;
+    this.success = false;
+    
+    // Capture stack trace
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+export class UnauthorizedError extends AppError {
+  constructor(message: string = 'Unauthorized access') {
+    super(message, 401);
+  }
+}
+
+export class ForbiddenError extends AppError {
+  constructor(message: string = 'Access forbidden') {
+    super(message, 403);
+  }
+}
+
+export class NotFoundError extends AppError {
+  constructor(message: string = 'Resource not found') {
+    super(message, 404);
+  }
+}
+
+export class ValidationError extends AppError {
+  constructor(message: string = 'Validation failed') {
+    super(message, 400);
+  }
+}
