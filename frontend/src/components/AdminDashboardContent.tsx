@@ -38,7 +38,7 @@ const AdminDashboardContent: React.FC<AdminDashboardProps> = ({ token }) => {
 
   const fetchStats = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/admin/stats', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/admin/stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();

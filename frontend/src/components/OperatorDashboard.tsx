@@ -94,7 +94,7 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/profile/me', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/profile/me`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
@@ -110,7 +110,7 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
 
   const fetchDistricts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/v1/districts', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/districts`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
@@ -125,7 +125,7 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
   const fetchRequests = async () => {
     setFetchingRequests(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/transfer-requests/my', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/transfer-requests/my`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
@@ -142,7 +142,7 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
   // Fetch detailed application including timeline/documents
   const fetchRequestDetails = async (requestId: string) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/transfer-requests/${requestId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/transfer-requests/${requestId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
@@ -188,8 +188,8 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
     try {
       let requestId = editRequestId;
       const url = isEditing && editRequestId
-        ? `http://localhost:5000/api/v1/transfer-requests/${editRequestId}`
-        : 'http://localhost:5000/api/v1/transfer-requests';
+        ? `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/transfer-requests/${editRequestId}`
+        : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/transfer-requests`;
       const method = isEditing ? 'PUT' : 'POST';
 
       // 1. Save or Update request details
@@ -221,7 +221,7 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
         const formData = new FormData();
         formData.append('file', selectedFile);
 
-        const uploadRes = await fetch(`http://localhost:5000/api/v1/transfer-requests/${requestId}/upload`, {
+        const uploadRes = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/transfer-requests/${requestId}/upload`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -256,7 +256,7 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/transfer-requests/${requestId}/submit`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/transfer-requests/${requestId}/submit`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -909,7 +909,7 @@ export const OperatorDashboard: React.FC<OperatorDashboardProps> = ({ token }) =
                         {selectedRequest.documents.map((doc: any) => (
                           <a
                             key={doc.document_id}
-                            href={`http://localhost:5000${doc.file_path}`}
+                            href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${doc.file_path}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{

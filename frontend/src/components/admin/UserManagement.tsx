@@ -38,7 +38,7 @@ const UserManagement: React.FC = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('upp_session_token');
-      const res = await fetch('http://localhost:5000/api/v1/users', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await res.json();
@@ -89,8 +89,8 @@ const UserManagement: React.FC = () => {
     try {
       const token = localStorage.getItem('upp_session_token');
       const url = editingUser 
-        ? `http://localhost:5000/api/v1/users/${editingUser.user_id}`
-        : 'http://localhost:5000/api/v1/users';
+        ? `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users/${editingUser.user_id}`
+        : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users`;
       const method = editingUser ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -149,7 +149,7 @@ const UserManagement: React.FC = () => {
       if (searchQuery) params.append('search', searchQuery);
       if (roleFilter) params.append('role', roleFilter);
       
-      const response = await fetch(`http://localhost:5000/api/v1/users/export?${params.toString()}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users/export?${params.toString()}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       

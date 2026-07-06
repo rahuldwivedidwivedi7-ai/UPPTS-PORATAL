@@ -89,7 +89,7 @@ export const ReviewerDashboard: React.FC<ReviewerDashboardProps> = ({ token, rol
     setFetching(true);
     setError(null);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/approvals/pending', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/approvals/pending`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
@@ -108,7 +108,7 @@ export const ReviewerDashboard: React.FC<ReviewerDashboardProps> = ({ token, rol
   // Fetch full details of selected request (timeline + attachments)
   const fetchRequestDetails = async (requestId: string) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/v1/transfer-requests/${requestId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/transfer-requests/${requestId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
@@ -135,7 +135,7 @@ export const ReviewerDashboard: React.FC<ReviewerDashboardProps> = ({ token, rol
     setGeneratedOrderNumber(null);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/approvals/${selectedRequest.request_id}/action`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/approvals/${selectedRequest.request_id}/action`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -484,7 +484,7 @@ export const ReviewerDashboard: React.FC<ReviewerDashboardProps> = ({ token, rol
                       {selectedRequest.documents.map(doc => (
                         <a
                           key={doc.document_id}
-                          href={`http://localhost:5000${doc.file_path}`}
+                          href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${doc.file_path}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{

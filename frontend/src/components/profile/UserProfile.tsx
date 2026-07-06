@@ -157,7 +157,7 @@ export const UserProfile: React.FC = () => {
         <div style={{ position: 'relative' }}>
           <div style={{ width: '100px', height: '100px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid var(--accent-blue)' }}>
             {profile.profile_photo_url ? (
-              <img src={`http://localhost:5000${profile.profile_photo_url}`} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${profile.profile_photo_url}`} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (
               <User size={40} color="rgba(255,255,255,0.5)" />
             )}
@@ -378,7 +378,7 @@ export const UserProfile: React.FC = () => {
                     <div style={{ display: 'flex', gap: '12px' }}>
                       {doc ? (
                         <>
-                          <a href={`http://localhost:5000${doc.file_path}`} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: '6px 16px', fontSize: '0.85rem' }}>
+                          <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${doc.file_path}`} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: '6px 16px', fontSize: '0.85rem' }}>
                             View
                           </a>
                           <button className="btn-secondary" onClick={() => handleDocUploadClick(type.id)} style={{ padding: '6px 16px', fontSize: '0.85rem', backgroundColor: 'transparent' }}>

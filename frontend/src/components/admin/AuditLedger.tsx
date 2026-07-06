@@ -23,7 +23,7 @@ const AuditLedger: React.FC = () => {
     setError('');
     try {
       const token = localStorage.getItem('upp_session_token') || localStorage.getItem('token');
-      const res = await fetch('http://localhost:5000/api/v1/admin/audit-logs', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/admin/audit-logs`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

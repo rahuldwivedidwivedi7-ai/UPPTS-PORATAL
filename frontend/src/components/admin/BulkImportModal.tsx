@@ -25,7 +25,7 @@ export const BulkImportModal: React.FC<BulkImportModalProps> = ({ onClose, onSuc
   const handleDownloadTemplate = async () => {
     try {
       const token = localStorage.getItem('upp_session_token');
-      const response = await fetch('http://localhost:5000/api/v1/users/import/template', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users/import/template`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       
@@ -68,7 +68,7 @@ export const BulkImportModal: React.FC<BulkImportModalProps> = ({ onClose, onSuc
       const formData = new FormData();
       formData.append('file', file);
       
-      const response = await fetch('http://localhost:5000/api/v1/users/import/preview', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users/import/preview`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
         body: formData
@@ -98,7 +98,7 @@ export const BulkImportModal: React.FC<BulkImportModalProps> = ({ onClose, onSuc
     try {
       const token = localStorage.getItem('upp_session_token');
       
-      const response = await fetch('http://localhost:5000/api/v1/users/import/confirm', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users/import/confirm`, {
         method: 'POST',
         headers: { 
           'Authorization': `Bearer ${token}`,

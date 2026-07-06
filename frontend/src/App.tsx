@@ -44,7 +44,7 @@ export const App: React.FC = () => {
     // Attempt backend logout to invalidate session
     if (token) {
       try {
-        await fetch('http://localhost:5000/api/v1/auth/logout', {
+        await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/auth/logout`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,

@@ -34,7 +34,7 @@ export interface UserDocument {
   uploaded_at: string;
 }
 
-const API_URL = 'http://localhost:5000/api/v1/profile';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/profile`;
 
 export const getProfile = async (token: string): Promise<UserProfile> => {
   const res = await fetch(`${API_URL}/me`, {

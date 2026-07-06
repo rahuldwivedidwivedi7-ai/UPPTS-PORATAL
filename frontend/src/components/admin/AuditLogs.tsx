@@ -30,7 +30,7 @@ const AuditLogs: React.FC<AuditLogsProps> = ({ token }) => {
   const fetchLogs = async () => {
     setLoadingLogs(true);
     try {
-      const res = await fetch('http://localhost:5000/api/v1/admin/audit-logs', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/admin/audit-logs`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
