@@ -68,7 +68,7 @@ export const App: React.FC = () => {
   // If user is not authenticated, render Auth screens
   if (!token || !user) {
     if (authMode === 'LANDING') {
-      return <LandingPage onLoginClick={() => setAuthMode('LOGIN')} />;
+      return <LandingPage onLoginClick={() => setAuthMode('LOGIN')} onRegisterClick={() => setAuthMode('REGISTER')} />;
     }
     if (authMode === 'REGISTER') {
       return <RegisterScreen onBackToLogin={() => setAuthMode('LOGIN')} />;

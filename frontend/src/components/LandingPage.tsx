@@ -4,9 +4,10 @@ import './LandingPage.css';
 
 interface LandingPageProps {
   onLoginClick: () => void;
+  onRegisterClick: () => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick, onRegisterClick }) => {
   return (
     <div className="landing-container">
       {/* Top Utility Bar */}
@@ -73,6 +74,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
           <div className="card red-card">
             <div className="card-header"><CheckCircle size={18} /> Quick Actions</div>
             <ul className="action-list">
+              <li onClick={onRegisterClick} style={{ cursor: 'pointer', backgroundColor: '#fffbe5' }}><span style={{ color: '#d97706', fontWeight: 'bold' }}>New Registration</span> <span className="arrow" style={{ color: '#d97706' }}>&gt;</span></li>
               <li><span>Apply for Transfer</span> <span className="arrow">&gt;</span></li>
               <li><span>Mutual Transfer Request</span> <span className="arrow">&gt;</span></li>
               <li><span>View Application Status</span> <span className="arrow">&gt;</span></li>
