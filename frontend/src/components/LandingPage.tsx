@@ -243,8 +243,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
           </div>
           <div className="footer-col nic-col">
             <span className="supported-text">Supported By</span>
-            <span>National Informatics Centre (NIC)</span>
-            <div className="nic-logo-box">NIC</div>
+            <span>Uttar Pradesh Police Technical Services</span>
+            <div className="nic-logo-box">UPPTS</div>
           </div>
           <div className="footer-col contact-col">
             <span className="col-title">Contact Us</span>
