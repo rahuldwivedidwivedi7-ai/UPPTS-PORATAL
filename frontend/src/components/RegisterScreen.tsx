@@ -91,8 +91,8 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ onBackToLogin })
       <div className="auth-card glass-panel" style={{ maxWidth: '600px', width: '100%' }}>
         <button 
           onClick={onBackToLogin}
-          className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 mb-6"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          className="flex items-center gap-2 mb-6"
+          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#cbd5e1' }}
         >
           <ArrowLeft size={18} /> Back to Login
         </button>
