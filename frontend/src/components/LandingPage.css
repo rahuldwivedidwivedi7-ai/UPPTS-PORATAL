@@ -117,6 +117,9 @@
 .hero-banner-img {
   width: 100%;
   height: auto;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center top;
   display: block;
   /* Slight scale to push any baked-in white image borders off-screen */
   transform: scale(1.02);
