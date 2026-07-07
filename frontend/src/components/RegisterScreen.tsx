@@ -89,13 +89,13 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ onBackToLogin })
       </div>
 
       <div className="auth-card glass-panel" style={{ maxWidth: '600px', width: '100%' }}>
-        <button 
+        <div 
           onClick={onBackToLogin}
           className="flex items-center gap-2 mb-6"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#cbd5e1' }}
+          style={{ cursor: 'pointer', padding: 0, color: '#cbd5e1', width: 'fit-content', position: 'relative', zIndex: 50 }}
         >
           <ArrowLeft size={18} /> Back to Login
-        </button>
+        </div>
 
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-white mb-2">Register New Account</h2>
