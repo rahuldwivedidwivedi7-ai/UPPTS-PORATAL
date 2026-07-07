@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Moon, User, Home, Info, FileText, Download, HelpCircle, PhoneCall, CheckCircle, Clock, Shield, Monitor, Users, Bell, Facebook, Twitter, Youtube, Instagram, HeadphonesIcon, Folder, AlertCircle, BarChart2 } from 'lucide-react';
+import { Mail, Phone, Moon, User, Home, Info, FileText, Download, HelpCircle, PhoneCall, CheckCircle, Clock, Shield, Monitor, Users, Bell, Globe, MessageCircle, Video, Camera, HeadphonesIcon, Folder, AlertCircle, BarChart2 } from 'lucide-react';
 import './LandingPage.css';
 
 interface LandingPageProps {
@@ -278,10 +278,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
           <div className="footer-col social-col">
             <span className="col-title">Stay Connected</span>
             <div className="social-icons">
-              <span className="social-icon fb"><Facebook size={16}/></span>
-              <span className="social-icon tw"><Twitter size={16}/></span>
-              <span className="social-icon yt"><Youtube size={16}/></span>
-              <span className="social-icon ig"><Instagram size={16}/></span>
+              <span className="social-icon fb"><Globe size={16}/></span>
+              <span className="social-icon tw"><MessageCircle size={16}/></span>
+              <span className="social-icon yt"><Video size={16}/></span>
+              <span className="social-icon ig"><Camera size={16}/></span>
             </div>
           </div>
         </div>
