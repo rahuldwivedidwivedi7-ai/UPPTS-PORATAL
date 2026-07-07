@@ -27,13 +27,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         </div>
       </div>
 
-      {/* Hero Banner Header */}
-      <header className="main-header hero-header">
-        <div className="hero-content">
-          <div className="hero-text">
-            <h2>Welcome to</h2>
-            <h1>UP Police<br/>E-Transfer Portal</h1>
-            <p>Transparent • Efficient • Secure</p>
+      {/* Main Header */}
+      <header className="main-header">
+        <div className="header-brand">
+          <img src="/assets/logo.png" alt="UP Police Logo" className="header-logo" />
+          <div className="header-titles">
+            <h2>UTTAR PRADESH POLICE</h2>
+            <h1>TRANSFER & POSTING PORTAL</h1>
+            <p>A Smart Transfer Management System</p>
           </div>
         </div>
         <div className="header-actions">

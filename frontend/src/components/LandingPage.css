@@ -44,52 +44,52 @@
   padding: 2px 10px;
 }
 
-/* Hero Header */
+/* Main Header */
 .main-header {
   background-color: #fdfdfd;
-  padding: 40px 60px;
+  padding: 15px 40px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   position: relative;
   z-index: 10;
-  background-image: linear-gradient(90deg, rgba(11, 26, 48, 0.8) 0%, rgba(11, 26, 48, 0.4) 40%, rgba(0,0,0,0) 100%), url('/assets/signature-building.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 320px;
+  background-image: url('/assets/signature-building.jpg');
+  background-size: contain;
+  background-position: right center;
+  background-repeat: no-repeat;
 }
 
-.hero-content {
+.header-brand {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  margin-top: 20px;
+  align-items: center;
+  gap: 20px;
 }
 
-.hero-text h2 {
-  color: #e2e8f0;
-  font-size: 1.8rem;
-  margin: 0 0 5px 0;
-  font-weight: 600;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+.header-logo {
+  height: 80px;
 }
-.hero-text h1 {
-  color: #ffffff;
-  font-size: 3.5rem;
-  margin: 0;
-  font-weight: 800;
-  line-height: 1.1;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-}
-.hero-text p {
-  color: #f8fafc;
-  margin: 15px 0 0 0;
+
+.header-titles h2 {
+  color: #00458b;
   font-size: 1.2rem;
-  font-weight: 500;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-  letter-spacing: 0.5px;
+  margin: 0;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.9);
+}
+.header-titles h1 {
+  color: #dc2626;
+  font-size: 1.8rem;
+  margin: 2px 0;
+  font-weight: 800;
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.9);
+}
+.header-titles p {
+  color: #1e293b;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.9);
 }
 
 
