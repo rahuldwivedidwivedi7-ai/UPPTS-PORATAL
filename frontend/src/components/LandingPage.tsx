@@ -27,41 +27,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         </div>
       </div>
 
-      {/* Hero Banner Section (Building Image Background) */}
+      {/* Hero Banner Section (Final Designed Image Background) */}
       <section className="hero-section">
-        {/* Main Header (Overlaid on Hero Image) */}
-        <header className="main-header">
-          <div className="header-brand">
-            <img src="/assets/logo.png" alt="UP Police Logo" className="header-logo" />
-            <div className="header-titles">
-              <h2>UTTAR PRADESH POLICE</h2>
-              <h1>TRANSFER & POSTING PORTAL</h1>
-              <p>A Smart Transfer Management System</p>
-            </div>
-          </div>
-          <div className="header-actions">
-            <button className="login-btn-large" onClick={onLoginClick}>
-              <User size={20} />
-              <div className="login-btn-text">
-                <span className="login-title">User Login</span>
-                <span className="login-sub">Login to your account</span>
-              </div>
-              <span className="chevron">▼</span>
-            </button>
-          </div>
-        </header>
       </section>
 
       {/* Navigation Menu (Dark Blue with Red accents) */}
       <nav className="main-nav">
         <ul>
-          <li className="nav-helpline-box">
-            <HeadphonesIcon size={18} />
-            <div className="helpline-text">
-              <span>Helpline</span>
-              <strong>0522-2393100</strong>
-            </div>
-          </li>
           <li className="active"><Home size={16} /> Home</li>
           <li><Info size={16} /> About Us</li>
           <li><FileText size={16} /> Transfer Policy</li>
@@ -71,6 +43,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
           <li><HelpCircle size={16} /> FAQ</li>
           <li><PhoneCall size={16} /> Contact Us</li>
         </ul>
+        <div className="nav-actions">
+          <button className="nav-login-btn" onClick={onLoginClick}>
+            <User size={18} />
+            <div className="nav-login-text">
+              <span className="nav-login-title">User Login</span>
+            </div>
+            <span className="chevron">▼</span>
+          </button>
+        </div>
       </nav>
 
       {/* Marquee Update */}

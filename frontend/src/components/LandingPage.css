@@ -44,82 +44,16 @@
   padding: 2px 10px;
 }
 
-/* Main Header (Now inside Hero Section) */
-.main-header {
-  background-color: transparent;
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.header-brand {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.header-logo {
-  height: 80px;
-}
-
-.header-titles h2 {
-  color: #00458b;
-  font-size: 1.2rem;
-  margin: 0;
-  font-weight: 700;
-}
-.header-titles h1 {
-  color: #dc2626;
-  font-size: 1.8rem;
-  margin: 2px 0;
-  font-weight: 800;
-}
-.header-titles p {
-  color: #4b5563;
-  margin: 0;
-  font-size: 0.95rem;
-}
-
-.login-btn-large {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background-color: white;
-  border: 1px solid #e5e7eb;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-  transition: all 0.2s;
-}
-.login-btn-large:hover {
-  background-color: #f9fafb;
-  transform: translateY(-2px);
-}
-.login-btn-text {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-}
-.login-title {
-  font-weight: 700;
-  color: #1e293b;
-  font-size: 0.95rem;
-}
-.login-sub {
-  font-size: 0.75rem;
-  color: #64748b;
-}
+/* Main Header (Removed as it's baked into image) */
 
 /* Navigation */
 .main-nav {
   background-color: #042557; /* Darker blue as in screenshot */
   color: white;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   border-bottom: 2px solid #dc2626;
+  align-items: center;
 }
 
 .main-nav ul {
@@ -129,22 +63,6 @@
   padding: 0;
   align-items: stretch;
 }
-
-.nav-helpline-box {
-  background-color: #e61919;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-right: 1px solid rgba(255,255,255,0.2);
-}
-.nav-helpline-box .helpline-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-.nav-helpline-box span { font-size: 0.75rem; opacity: 0.9; }
-.nav-helpline-box strong { font-size: 1.1rem; font-weight: 800; }
 
 .main-nav li {
   padding: 12px 20px;
@@ -160,8 +78,28 @@
 .main-nav li.active {
   background-color: #dc2626;
 }
-.main-nav li:not(.active):not(.nav-helpline-box):hover {
+.main-nav li:not(.active):hover {
   background-color: #003366;
+}
+
+.nav-actions {
+  padding-right: 20px;
+}
+.nav-login-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  color: #042557;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.nav-login-btn:hover {
+  background-color: #f1f5f9;
 }
 
 /* Hero Section */
@@ -172,7 +110,7 @@
   border-radius: 16px;
   box-shadow: 0 4px 25px rgba(0,0,0,0.1);
   height: 380px;
-  background-image: url('/assets/signature-building.jpg');
+  background-image: url('/assets/final-banner.png');
   background-size: cover;
   background-position: center;
   display: flex;
