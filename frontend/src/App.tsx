@@ -6,6 +6,7 @@ import { OperatorDashboard } from './components/OperatorDashboard.js';
 import { ReviewerDashboard } from './components/ReviewerDashboard.js';
 import { AdminDashboard } from './components/AdminDashboard.js';
 import SuperAdminDashboard from './components/admin/SuperAdminDashboard.js';
+import { LandingPage } from './components/LandingPage.js';
 import { LogOut, User } from 'lucide-react';
 
 interface UserSession {
@@ -62,10 +63,13 @@ export const App: React.FC = () => {
     localStorage.removeItem('upp_session_user');
   };
 
-  const [authMode, setAuthMode] = useState<'LOGIN' | 'REGISTER' | 'FORGOT_PASSWORD'>('LOGIN');
+  const [authMode, setAuthMode] = useState<'LANDING' | 'LOGIN' | 'REGISTER' | 'FORGOT_PASSWORD'>('LANDING');
 
   // If user is not authenticated, render Auth screens
   if (!token || !user) {
+    if (authMode === 'LANDING') {
+      return <LandingPage onLoginClick={() => setAuthMode('LOGIN')} />;
+    }
     if (authMode === 'REGISTER') {
       return <RegisterScreen onBackToLogin={() => setAuthMode('LOGIN')} />;
     }
