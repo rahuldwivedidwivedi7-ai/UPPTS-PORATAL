@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Moon, User, Home, Info, FileText, Download, HelpCircle, PhoneCall, CheckCircle, Clock, Shield, Monitor, Users, Bell } from 'lucide-react';
+import { Mail, Phone, Moon, User, Home, Info, FileText, Download, HelpCircle, PhoneCall, CheckCircle, Clock, Shield, Monitor, Users, Bell, Facebook, Twitter, Youtube, Instagram, HeadphonesIcon, Folder, AlertCircle, BarChart2 } from 'lucide-react';
 import './LandingPage.css';
 
 interface LandingPageProps {
@@ -12,8 +12,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
       {/* Top Utility Bar */}
       <div className="top-bar">
         <div className="top-bar-left">
-          <span className="contact-item"><Mail size={14} /> helpdesk@upptransfer.gov.in</span>
-          <span className="contact-item"><Phone size={14} /> 0522-XXXXXXX</span>
+          <span className="contact-item"><Mail size={14} /> helpdesk@uppolice.gov.in</span>
+          <span className="contact-item"><Phone size={14} /> 0522-2393100</span>
         </div>
         <div className="top-bar-right">
           <span>Screen Reader Access</span>
@@ -27,7 +27,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         </div>
       </div>
 
-      {/* Main Header */}
+      {/* Main Header (White Background) */}
       <header className="main-header">
         <div className="header-brand">
           <img src="/assets/logo.png" alt="UP Police Logo" className="header-logo" />
@@ -62,21 +62,32 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
           <li><PhoneCall size={16} /> Contact Us</li>
         </ul>
         <div className="nav-helpline">
-          <PhoneCall size={18} />
+          <HeadphonesIcon size={18} />
           <div className="helpline-text">
             <span>Helpline</span>
-            <strong>0522-XXXXXXX</strong>
+            <strong>0522-2393100</strong>
           </div>
         </div>
       </nav>
 
-      {/* Marquee Update */}
-      <div className="update-ticker">
-        <div className="ticker-label"><Bell size={16} /> Latest Update:</div>
-        <div className="ticker-text-container">
-          <div className="ticker-text">Online transfer application window is open. Last date to apply: 31 May 2026.</div>
+      {/* Hero Banner Section */}
+      <section className="hero-section">
+        <div className="hero-text-container">
+          <h2>Welcome to</h2>
+          <h1>UP Police<br/>E-Transfer Portal</h1>
+          <p>Transparent • Efficient • Secure</p>
         </div>
-        <button className="view-all-btn">View All Notifications <span className="badge">3</span></button>
+      </section>
+
+      {/* Marquee Update */}
+      <div className="update-ticker-wrapper">
+        <div className="update-ticker">
+          <div className="ticker-label"><Bell size={16} /> Latest Update:</div>
+          <div className="ticker-text-container">
+            <div className="ticker-text">Online transfer application window is open. Last date to apply: 31 May 2026.</div>
+          </div>
+          <button className="view-all-btn">View All Notifications <span className="badge">3</span></button>
+        </div>
       </div>
 
       {/* Main Layout Grid */}
@@ -94,67 +105,83 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             </ul>
           </div>
 
-          <div className="card purple-card">
+          <div className="card blue-card">
             <div className="card-header"><FileText size={18} /> Important Links</div>
             <ul className="link-list">
-              <li><FileText size={14} /> Transfer Policy</li>
-              <li><FileText size={14} /> Government Orders</li>
-              <li><FileText size={14} /> Act / Rules</li>
-              <li><FileText size={14} /> Frequently Asked Questions</li>
-              <li><FileText size={14} /> User Manual / Help Videos</li>
+              <li><FileText size={14} /> Transfer Policy <span className="arrow">&gt;</span></li>
+              <li><FileText size={14} /> Government Orders <span className="arrow">&gt;</span></li>
+              <li><FileText size={14} /> Act / Rules <span className="arrow">&gt;</span></li>
+              <li><FileText size={14} /> Frequently Asked Questions <span className="arrow">&gt;</span></li>
+              <li><FileText size={14} /> User Manual / Help Videos <span className="arrow">&gt;</span></li>
             </ul>
           </div>
         </aside>
 
-        {/* Center Circular UI */}
-        <section className="center-hub">
-          <div className="hub-container">
-            <div className="hub-center">
-              <img src="/assets/logo.png" alt="UP Police" />
-              <h3>TRANSFER &<br/>POSTING SYSTEM</h3>
-              <p>Uttar Pradesh Police</p>
+        {/* Center Content - Our Services Grid */}
+        <section className="center-services">
+          <div className="services-header">
+            <hr className="line" />
+            <h3>Our Services</h3>
+            <hr className="line" />
+          </div>
+          <div className="services-grid">
+            <div className="service-card">
+              <div className="service-icon s-red"><Users size={28} /></div>
+              <h4>Apply for Transfer</h4>
+              <p>Apply online for transfer</p>
             </div>
-            
-            {/* Circular Nodes */}
-            <div className="hub-node node-1 red-node">
-              <div className="node-icon"><Users size={24} /></div>
-              <span>Apply for<br/>Transfer</span>
+            <div className="service-card">
+              <div className="service-icon s-green"><Users size={28} /></div>
+              <h4>Mutual Transfer Request</h4>
+              <p>Request mutual transfer</p>
             </div>
-            <div className="hub-node node-2 blue-node">
-              <div className="node-icon"><FileText size={24} /></div>
-              <span>View<br/>Application Status</span>
+            <div className="service-card">
+              <div className="service-icon s-blue"><FileText size={28} /></div>
+              <h4>View Application Status</h4>
+              <p>Track your application</p>
             </div>
-            <div className="hub-node node-3 green-node">
-              <div className="node-icon"><CheckCircle size={24} /></div>
-              <span>Transfer<br/>Orders</span>
+            <div className="service-card">
+              <div className="service-icon s-orange"><FileText size={28} /></div>
+              <h4>Transfer Orders</h4>
+              <p>View transfer orders</p>
             </div>
-            <div className="hub-node node-4 purple-node">
-              <div className="node-icon"><FileText size={24} /></div>
-              <span>Cancellation<br/>Request</span>
+            <div className="service-card">
+              <div className="service-icon s-teal"><FileText size={28} /></div>
+              <h4>Transfer Policy</h4>
+              <p>View transfer guidelines</p>
             </div>
-            <div className="hub-node node-5 orange-node">
-              <div className="node-icon"><FileText size={24} /></div>
-              <span>Transfer<br/>Policy</span>
+            <div className="service-card">
+              <div className="service-icon s-purple"><PhoneCall size={28} /></div>
+              <h4>Helpdesk / Support</h4>
+              <p>Get help & support</p>
             </div>
-            <div className="hub-node node-6 cyan-node">
-              <div className="node-icon"><Download size={24} /></div>
-              <span>Forms /<br/>Downloads</span>
+            <div className="service-card">
+              <div className="service-icon s-yellow"><Download size={28} /></div>
+              <h4>Forms / Downloads</h4>
+              <p>Download required forms</p>
             </div>
-            <div className="hub-node node-7 deep-purple-node">
-              <div className="node-icon"><PhoneCall size={24} /></div>
-              <span>Helpdesk /<br/>Support</span>
+            <div className="service-card">
+              <div className="service-icon s-darkblue"><Folder size={28} /></div>
+              <h4>Service Records</h4>
+              <p>View service details</p>
             </div>
-            <div className="hub-node node-8 lime-node">
-              <div className="node-icon"><Users size={24} /></div>
-              <span>Mutual<br/>Transfer Request</span>
+            <div className="service-card">
+              <div className="service-icon s-pink"><AlertCircle size={28} /></div>
+              <h4>Notifications</h4>
+              <p>View all notifications</p>
+            </div>
+            <div className="service-card">
+              <div className="service-icon s-indigo"><BarChart2 size={28} /></div>
+              <h4>Reports & Statistics</h4>
+              <p>View detailed reports</p>
             </div>
           </div>
         </section>
 
         {/* Right Sidebar */}
         <aside className="sidebar-right">
-          <div className="card blue-card">
-            <div className="card-header"><Users size={18} /> Dashboard Overview</div>
+          <div className="card solid-blue-card">
+            <div className="card-header"><BarChart2 size={18} /> Dashboard Overview</div>
             <ul className="stats-list">
               <li>
                 <span className="stat-label"><Users size={14} /> Total Employees</span>
@@ -179,14 +206,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
             </ul>
           </div>
 
-          <div className="card yellow-card">
+          <div className="card solid-yellow-card mt-4">
             <div className="card-header"><CheckCircle size={18} /> Latest Transfer Orders <span className="view-all">View All</span></div>
             <ul className="orders-list">
-              <li><span>Order No. 1234/2026</span> <span className="order-date">20 May 2026</span></li>
-              <li><span>Order No. 1233/2026</span> <span className="order-date">19 May 2026</span></li>
-              <li><span>Order No. 1232/2026</span> <span className="order-date">18 May 2026</span></li>
-              <li><span>Order No. 1231/2026</span> <span className="order-date">17 May 2026</span></li>
-              <li><span>Order No. 1230/2026</span> <span className="order-date">16 May 2026</span></li>
+              <li><span>Order No. 1234/2025</span> <span className="order-date">20 May 2025</span></li>
+              <li><span>Order No. 1233/2025</span> <span className="order-date">19 May 2025</span></li>
+              <li><span>Order No. 1232/2025</span> <span className="order-date">18 May 2025</span></li>
+              <li><span>Order No. 1231/2025</span> <span className="order-date">17 May 2025</span></li>
+              <li><span>Order No. 1230/2025</span> <span className="order-date">16 May 2025</span></li>
             </ul>
           </div>
         </aside>
@@ -223,7 +250,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
           </div>
         </div>
         <div className="feature-card f-cyan">
-          <PhoneCall size={32} />
+          <HeadphonesIcon size={32} />
           <div className="feature-text">
             <h4>24x7 Helpdesk</h4>
             <p>Dedicated support for all users</p>
@@ -231,19 +258,40 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         </div>
       </section>
 
-      {/* Main Footer */}
-      <footer className="main-footer">
-        <div className="footer-left">
-          <img src="/assets/logo.png" alt="Logo" className="footer-logo" />
-          <span>© 2026 Uttar Pradesh Police. All Rights Reserved.</span>
+      {/* Detailed Dark Blue Footer */}
+      <footer className="detailed-footer">
+        <div className="footer-top">
+          <div className="footer-col brand-col">
+            <img src="/assets/logo.png" alt="Logo" className="footer-logo" />
+            <span>© 2026 Uttar Pradesh Police. All Rights Reserved.</span>
+          </div>
+          <div className="footer-col nic-col">
+            <span className="supported-text">Supported By</span>
+            <span>National Informatics Centre (NIC)</span>
+            <div className="nic-logo-box">NIC</div>
+          </div>
+          <div className="footer-col contact-col">
+            <span className="col-title">Contact Us</span>
+            <div className="contact-detail"><Monitor size={14}/> Police Headquarters, Gomti Nagar, Lucknow, Uttar Pradesh - 226010</div>
+            <div className="contact-detail"><Phone size={14}/> 0522-2393100 &nbsp; | &nbsp; <Mail size={14}/> helpdesk@uppolice.gov.in</div>
+          </div>
+          <div className="footer-col social-col">
+            <span className="col-title">Stay Connected</span>
+            <div className="social-icons">
+              <span className="social-icon fb"><Facebook size={16}/></span>
+              <span className="social-icon tw"><Twitter size={16}/></span>
+              <span className="social-icon yt"><Youtube size={16}/></span>
+              <span className="social-icon ig"><Instagram size={16}/></span>
+            </div>
+          </div>
         </div>
-        <div className="footer-center">
-          <span>Best viewed in Google Chrome 90+</span>
-          <span className="divider">|</span>
-          <span>Website owned by Police Headquarters, Uttar Pradesh</span>
-        </div>
-        <div className="footer-right">
-          <span>National Informatics Centre</span>
+        <div className="footer-bottom">
+          <div className="footer-links">
+            <span>Privacy Policy</span> | <span>Terms & Conditions</span> | <span>Disclaimer</span>
+          </div>
+          <div className="footer-browser">
+            Best viewed in Chrome, Firefox & Edge
+          </div>
         </div>
       </footer>
     </div>
