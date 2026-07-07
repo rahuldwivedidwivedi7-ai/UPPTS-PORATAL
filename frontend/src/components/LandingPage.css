@@ -166,12 +166,12 @@
 
 /* Hero Section */
 .hero-section {
-  width: 96%;
-  max-width: 1600px;
-  margin: 15px auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-  height: 360px;
+  width: 90%;
+  max-width: 1300px;
+  margin: 20px auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.1);
+  height: 380px;
   background-image: url('/assets/signature-building.jpg');
   background-size: cover;
   background-position: center;
