@@ -27,8 +27,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick }) => {
         </div>
       </div>
 
-      {/* Hero Banner Section (Final Designed Image Background) */}
+      {/* Hero Banner Section (Final Designed Image) */}
       <section className="hero-section">
+        <img src="/assets/final-banner.png" alt="UP Police Transfer Portal" className="hero-banner-img" />
       </section>
 
       {/* Navigation Menu (Dark Blue with Red accents) */}

@@ -104,20 +104,22 @@
 
 /* Hero Section */
 .hero-section {
-  width: 90%;
-  max-width: 1300px;
-  margin: 20px auto;
-  border-radius: 16px;
-  box-shadow: 0 4px 25px rgba(0,0,0,0.1);
-  height: 380px;
-  background-image: url('/assets/final-banner.png');
-  background-size: 103% 106%;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
+  margin: 0;
   padding: 0;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8fafc;
+}
+
+.hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Slight scale to push any baked-in white image borders off-screen */
+  transform: scale(1.02);
 }
 
 /* Ticker */
