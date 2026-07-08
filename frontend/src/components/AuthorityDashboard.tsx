@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Shield, FileText, AlertCircle, 
+  FileText, AlertCircle, 
   RefreshCw, FileCheck, CheckCircle, XCircle, Undo2, Award, Download
 } from 'lucide-react';
 import { ApplicationWorkflowTracker } from './ApplicationWorkflowTracker';
@@ -57,7 +57,7 @@ interface PendingRequest {
 export const AuthorityDashboard: React.FC<AuthorityDashboardProps> = ({ token, role }) => {
   const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
   const [selectedRequest, setSelectedRequest] = useState<PendingRequest | null>(null);
-  const [activeTab, setActiveTab] = useState<'PENDING' | 'PROCESSED'>('PENDING');
+  const [activeTab] = useState<'PENDING' | 'PROCESSED'>('PENDING');
   
   // Helper: Get status badge styles
   const getStatusStyle = (status: string) => {
@@ -75,7 +75,6 @@ export const AuthorityDashboard: React.FC<AuthorityDashboardProps> = ({ token, r
   
   // Status flags
   const [loading, setLoading] = useState(false);
-  const [fetching, setFetching] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -87,7 +86,6 @@ export const AuthorityDashboard: React.FC<AuthorityDashboardProps> = ({ token, r
   }, []);
 
   const fetchPendingRequests = async () => {
-    setFetching(true);
     setError(null);
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/approvals/pending`, {
@@ -100,9 +98,7 @@ export const AuthorityDashboard: React.FC<AuthorityDashboardProps> = ({ token, r
         throw new Error(result.message || 'Failed to fetch pending reviews.');
       }
     } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setFetching(false);
+      setError(err instanceof Error ? err.message : 'Unknown error');
     }
   };
 
@@ -610,4 +606,4 @@ export const AuthorityDashboard: React.FC<AuthorityDashboardProps> = ({ token, r
     </div>
   );
 };
-export default ReviewerDashboard;
+export default AuthorityDashboard;
