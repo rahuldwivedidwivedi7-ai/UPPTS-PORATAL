@@ -123,7 +123,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavi
             <label className="text-xs font-semibold text-gray-300 tracking-wider mb-2 block uppercase">
               Username / PNO Number
             </label>
-            <div className="input-with-icon">
+            <div className="input-wrapper">
               <User className="input-icon" size={20} />
               <input
                 type="text"
@@ -145,7 +145,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavi
             <label className="text-xs font-semibold text-gray-300 tracking-wider mb-2 block uppercase">
               Password
             </label>
-            <div className="input-with-icon">
+            <div className="input-wrapper">
               <Lock className="input-icon" size={20} />
               <input
                 type={showPassword ? "text" : "password"}
