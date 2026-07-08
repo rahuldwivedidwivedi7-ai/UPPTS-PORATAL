@@ -200,26 +200,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavi
             )}
           </button>
         </form>
-
-        <div className="text-center" style={{ marginTop: '24px', marginBottom: '24px' }}>
-          <p className="text-sm text-gray-400">
-            Don't have an account?{' '}
-            <button 
-              type="button"
-              onClick={onNavigateRegister}
-              className="font-semibold transition-colors hover:opacity-80"
-              style={{ color: 'white', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-            >
-              Register New Account
-            </button>
-          </p>
-        </div>
-
-        <div className="text-center">
-          <p className="text-xs text-gray-500 font-medium flex items-center justify-center gap-2 opacity-70">
-            <Shield size={14} /> Service • Security • Dedication
-          </p>
-        </div>
       </div>
     </div>
   );
