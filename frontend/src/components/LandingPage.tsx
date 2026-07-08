@@ -47,6 +47,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick, onRegist
         </ul>
         <div className="nav-actions">
           <button className="nav-login-btn" onClick={onLoginClick}>
+            <div className="click-here-pulse">CLICK HERE</div>
             <User size={18} />
             <div className="nav-login-text">
               <span className="nav-login-title">User Login</span>
@@ -74,7 +75,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLoginClick, onRegist
           <div className="card red-card">
             <div className="card-header"><CheckCircle size={18} /> Quick Actions</div>
             <ul className="action-list">
-              <li onClick={onRegisterClick} style={{ cursor: 'pointer', backgroundColor: '#fffbe5' }}><span style={{ color: '#d97706', fontWeight: 'bold' }}>New Registration</span> <span className="arrow" style={{ color: '#d97706' }}>&gt;</span></li>
+              <li onClick={onRegisterClick} style={{ cursor: 'pointer', backgroundColor: '#fffbe5' }}>
+                <span style={{ color: '#d97706', fontWeight: 'bold' }}>New Registration</span> 
+                <span className="new-badge-anim">NEW</span>
+                <span className="arrow" style={{ color: '#d97706' }}>&gt;</span>
+              </li>
               <li><span>Apply for Transfer</span> <span className="arrow">&gt;</span></li>
               <li><span>Mutual Transfer Request</span> <span className="arrow">&gt;</span></li>
               <li><span>View Application Status</span> <span className="arrow">&gt;</span></li>
