@@ -71,7 +71,7 @@ export const App: React.FC = () => {
       return <LandingPage onLoginClick={() => setAuthMode('LOGIN')} onRegisterClick={() => setAuthMode('REGISTER')} />;
     }
     if (authMode === 'REGISTER') {
-      return <RegisterScreen onBackToLogin={() => setAuthMode('LOGIN')} />;
+      return <RegisterScreen onBackToLogin={() => setAuthMode('LANDING')} />;
     }
     
     if (authMode === 'FORGOT_PASSWORD') {
@@ -83,6 +83,7 @@ export const App: React.FC = () => {
         onLoginSuccess={handleLoginSuccess} 
         onNavigateRegister={() => setAuthMode('REGISTER')}
         onNavigateForgotPassword={() => setAuthMode('FORGOT_PASSWORD')}
+        onBackToHome={() => setAuthMode('LANDING')}
       />
     );
   }

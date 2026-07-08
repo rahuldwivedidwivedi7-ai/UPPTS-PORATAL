@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, ArrowRight, AlertCircle, CheckCircle, Lock, Eye, EyeOff, Shield } from 'lucide-react';
+import { User, ArrowRight, ArrowLeft, AlertCircle, CheckCircle, Lock, Eye, EyeOff, Shield } from 'lucide-react';
 
 interface LoginScreenProps {
   onLoginSuccess: (token: string, user: {
@@ -11,9 +11,10 @@ interface LoginScreenProps {
   }) => void;
   onNavigateRegister?: () => void;
   onNavigateForgotPassword?: () => void;
+  onBackToHome?: () => void;
 }
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavigateRegister, onNavigateForgotPassword }) => {
+export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavigateRegister, onNavigateForgotPassword, onBackToHome }) => {
   // Credentials Inputs
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -74,6 +75,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavi
       </div>
 
       <div className="auth-card glass-panel">
+        {onBackToHome && (
+          <div 
+            onClick={onBackToHome}
+            className="flex items-center gap-2 mb-6"
+            style={{ cursor: 'pointer', padding: 0, color: '#cbd5e1', width: 'fit-content', position: 'relative', zIndex: 50 }}
+          >
+            <ArrowLeft size={18} /> Back to Home
+          </div>
+        )}
         {/* Header Branding */}
         <div className="text-center mb-6">
           <div style={{ marginBottom: '12px', display: 'flex', justifyContent: 'center' }}>

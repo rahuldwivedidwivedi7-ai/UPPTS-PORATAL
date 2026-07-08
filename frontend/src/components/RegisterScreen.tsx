@@ -74,7 +74,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ onBackToLogin })
           <h2 className="text-2xl font-bold text-white mb-2">Registration Successful</h2>
           <p className="text-gray-300 mb-6">Your account has been created successfully. You can now login using your PNO and password.</p>
           <button onClick={onBackToLogin} className="btn-primary w-full flex items-center justify-center gap-2">
-            Back to Login <ArrowRight size={20} />
+            Back to Home <ArrowRight size={20} />
           </button>
         </div>
       </div>
@@ -94,7 +94,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = ({ onBackToLogin })
           className="flex items-center gap-2 mb-6"
           style={{ cursor: 'pointer', padding: 0, color: '#cbd5e1', width: 'fit-content', position: 'relative', zIndex: 50 }}
         >
-          <ArrowLeft size={18} /> Back to Login
+          <ArrowLeft size={18} /> Back to Home
         </div>
 
         <div className="text-center mb-8">
