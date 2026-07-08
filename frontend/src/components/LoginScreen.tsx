@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, ArrowRight, ArrowLeft, AlertCircle, CheckCircle, Lock, Eye, EyeOff, Shield } from 'lucide-react';
+import { User, ArrowRight, ArrowLeft, AlertCircle, CheckCircle, Lock, Eye, EyeOff } from 'lucide-react';
 
 interface LoginScreenProps {
   onLoginSuccess: (token: string, user: {
@@ -9,12 +9,11 @@ interface LoginScreenProps {
     name: string;
     district_id: string | null;
   }) => void;
-  onNavigateRegister?: () => void;
   onNavigateForgotPassword?: () => void;
   onBackToHome?: () => void;
 }
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavigateRegister, onNavigateForgotPassword, onBackToHome }) => {
+export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess, onNavigateForgotPassword, onBackToHome }) => {
   // Credentials Inputs
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

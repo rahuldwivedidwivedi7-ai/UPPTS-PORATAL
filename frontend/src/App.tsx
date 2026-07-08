@@ -81,7 +81,6 @@ export const App: React.FC = () => {
     return (
       <LoginScreen 
         onLoginSuccess={handleLoginSuccess} 
-        onNavigateRegister={() => setAuthMode('REGISTER')}
         onNavigateForgotPassword={() => setAuthMode('FORGOT_PASSWORD')}
         onBackToHome={() => setAuthMode('LANDING')}
       />
