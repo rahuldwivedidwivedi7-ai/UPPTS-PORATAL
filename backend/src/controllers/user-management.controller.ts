@@ -76,8 +76,8 @@ export const userManagementController = {
         // Create user record directly without personnel record
         const userQuery = `
           INSERT INTO users (
-            user_id, personnel_id, district_id, username, pno_number, full_name, father_name, dob, gender, \`rank\`, posting_district, password_hash, email, mobile_number, role, reporting_authority_user_id, force_password_change
-          ) VALUES (?, NULL, ?, ?, NULL, ?, NULL, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, TRUE)
+            user_id, personnel_id, district_id, username, pno_number, full_name, father_name, dob, gender, "rank", posting_district, password_hash, email, mobile_number, role, reporting_authority_user_id, force_password_change
+          ) VALUES ($1, NULL, $2, $3, NULL, $4, NULL, NULL, NULL, $5, $6, $7, $8, $9, $10, $11, TRUE)
         `;
         
         await conn.query(userQuery, [
@@ -421,14 +421,14 @@ export const userManagementController = {
           const fallbackEmail = record.email || `${record.username}@upp.gov.in`;
           const fallbackMobile = record.mobile_number || Math.floor(1000000000 + Math.random() * 9000000000).toString();
 
-          const query = `
-            INSERT INTO users (
-              user_id, personnel_id, district_id, username, pno_number, full_name, father_name, dob, gender, \`rank\`, 
-              posting_district, password_hash, email, mobile_number, role, reporting_authority_user_id
-            ) VALUES (?, NULL, ?, ?, ?, ?, 'N/A', '1980-01-01', 'MALE', ?, ?, ?, ?, ?, ?, ?)
-          `;
-
-          await conn.query(query, [
+          const userQuery = `
+              INSERT INTO users (
+                user_id, personnel_id, district_id, username, pno_number, full_name, father_name, dob, gender, "rank", 
+                posting_district, password_hash, email, mobile_number, role, reporting_authority_user_id, force_password_change
+              ) VALUES ($1, NULL, $2, $3, $4, $5, 'N/A', '1980-01-01', 'MALE', $6, $7, $8, $9, $10, $11, $12, TRUE)
+            `;
+            
+            await conn.query(userQuery, [
             userId, record.district_id || null, record.username, pno, record.full_name,
             record.role, record.district_id || 'HQ', passwordHash, fallbackEmail, fallbackMobile,
             record.role, record.reporting_authority_user_id || null
