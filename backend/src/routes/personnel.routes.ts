@@ -5,11 +5,11 @@ import authorizeRoles from '../middlewares/rbac.middleware.js';
 
 const router = Router();
 
-// Protect personnel profile: must be COMPUTER_OPERATOR role
+// Protect personnel profile: must be APPLICANT role
 router.get(
   '/profile',
   authMiddleware,
-  authorizeRoles('COMPUTER_OPERATOR'),
+  authorizeRoles('APPLICANT'),
   personnelController.getProfile
 );
 

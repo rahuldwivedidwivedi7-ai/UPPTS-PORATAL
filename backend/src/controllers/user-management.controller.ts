@@ -320,7 +320,7 @@ export const userManagementController = {
       
       const conn = await db.getClient();
       try {
-        const allowedRoles = ['SUPER_ADMIN', 'SUPERVISOR', 'DISTRICT_SP', 'IG', 'DIG', 'HQ', 'ADMIN', 'COMPUTER_OPERATOR'];
+        const allowedRoles = ['SUPER_ADMIN', 'APPLICANT', 'DISTRICT_ADMIN', 'DISTRICT_SP', 'TS_UPCC_ADMIN', 'TS_UPCC_SP', 'TS_DIG_IG', 'TSHQ_ADMIN', 'ADG_TS'];
 
         for (const data of rows) {
           const errors: string[] = [];

@@ -104,7 +104,7 @@ export const transferService = {
     }
 
     // Access control check: Operators can only access their own requests
-    if (userRole === 'COMPUTER_OPERATOR' && request.personnel_id !== personnelId) {
+    if (userRole === 'APPLICANT' && request.personnel_id !== personnelId) {
       throw new ForbiddenError('Access denied: You cannot view requests belonging to other personnel.');
     }
 

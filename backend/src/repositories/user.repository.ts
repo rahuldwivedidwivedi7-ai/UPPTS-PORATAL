@@ -15,7 +15,7 @@ export interface UserRow {
   password_hash: string;
   email: string;
   mobile_number: string;
-  role: 'COMPUTER_OPERATOR' | 'DISTRICT_SP' | 'SP_COMPUTER_CENTRE' | 'ADG_TECHNICAL_SERVICES' | 'ADMIN' | 'SUPERVISOR' | 'SP' | 'IG' | 'HQ' | 'SUPER_ADMIN';
+  role: 'SUPER_ADMIN' | 'APPLICANT' | 'DISTRICT_ADMIN' | 'DISTRICT_SP' | 'TS_UPCC_ADMIN' | 'TS_UPCC_SP' | 'TS_DIG_IG' | 'TSHQ_ADMIN' | 'ADG_TS';
   status: 'ACTIVE' | 'INACTIVE' | 'LOCKED';
   failed_login_attempts: number;
   lockout_until: Date | null;

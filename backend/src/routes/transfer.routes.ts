@@ -14,7 +14,7 @@ router.use(authMiddleware);
 // Operator Create Transfer Request
 router.post(
   '/',
-  authorizeRoles('COMPUTER_OPERATOR'),
+  authorizeRoles('APPLICANT'),
   validateRequest(createRequestSchema),
   transferController.createRequest
 );
@@ -22,7 +22,7 @@ router.post(
 // Operator Fetch My Applications
 router.get(
   '/my',
-  authorizeRoles('COMPUTER_OPERATOR'),
+  authorizeRoles('APPLICANT'),
   transferController.getMyRequests
 );
 
@@ -35,7 +35,7 @@ router.get(
 // Operator Edit Draft/Returned Request
 router.put(
   '/:id',
-  authorizeRoles('COMPUTER_OPERATOR'),
+  authorizeRoles('APPLICANT'),
   validateRequest(updateRequestSchema),
   transferController.updateRequest
 );
@@ -43,14 +43,14 @@ router.put(
 // Operator Submit Draft Request
 router.post(
   '/:id/submit',
-  authorizeRoles('COMPUTER_OPERATOR'),
+  authorizeRoles('APPLICANT'),
   transferController.submitDraft
 );
 
 // Operator Upload Attachments (Max 5MB PDF/Image)
 router.post(
   '/:id/upload',
-  authorizeRoles('COMPUTER_OPERATOR'),
+  authorizeRoles('APPLICANT'),
   upload.single('file'),
   transferController.uploadDocument
 );

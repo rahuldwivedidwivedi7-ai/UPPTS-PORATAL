@@ -117,7 +117,7 @@ export const authService = {
       password_hash: passwordHash,
       email: data.email,
       mobile_number: data.mobile_number,
-      role: 'COMPUTER_OPERATOR'
+      role: 'APPLICANT'
     });
 
     auditLogger.log(userId, 'REGISTER_SUCCESS', `User ${data.pno_number} successfully registered.`, clientIp);

@@ -321,8 +321,8 @@ const UserManagement: React.FC = () => {
             
             <form onSubmit={handleSaveUser} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div style={{ gridColumn: '1 / -1' }}>
-                <label className="form-label">Full Name</label>
-                <input type="text" name="full_name" className="form-input" value={formData.full_name} onChange={handleInputChange} required />
+                <label className="form-label">Designation Title</label>
+                <input type="text" name="full_name" className="form-input" value={formData.full_name} onChange={handleInputChange} placeholder="e.g. SP Lucknow, ADG Tech Services" required />
               </div>
               
               <div>
@@ -335,31 +335,58 @@ const UserManagement: React.FC = () => {
                 <label className="form-label">{editingUser ? 'New Password (leave blank to keep)' : 'Password'}</label>
                 <input type="password" name="password" className="form-input" value={formData.password} onChange={handleInputChange} required={!editingUser} />
               </div>
-
-              <div>
-                <label className="form-label">PNO Number</label>
-                <input type="text" name="pno_number" className="form-input" value={formData.pno_number} onChange={handleInputChange} />
-              </div>
               
               <div>
                 <label className="form-label">Role</label>
                 <select name="role" className="form-input" value={formData.role} onChange={handleInputChange} required>
-                  <option value="SUPERVISOR">Supervisor</option>
-                  <option value="DISTRICT_SP">SP (Superintendent of Police)</option>
-                  <option value="IG">IG (Inspector General)</option>
-                  <option value="HQ">HQ Reviewer</option>
-                  <option value="ADMIN">Admin</option>
+                  <option value="DISTRICT_ADMIN">District Admin</option>
+                  <option value="DISTRICT_SP">SP (Current District)</option>
+                  <option value="TS_UPCC_ADMIN">TS/UPCC Admin</option>
+                  <option value="TS_UPCC_SP">TS/UPCC SP</option>
+                  <option value="TS_DIG_IG">DIG/IG</option>
+                  <option value="TSHQ_ADMIN">TSHQ Admin</option>
+                  <option value="ADG_TS">ADG Technical Services</option>
                 </select>
               </div>
 
               <div>
-                <label className="form-label">District / Zone Code</label>
-                <input type="text" name="district_id" className="form-input" value={formData.district_id} onChange={handleInputChange} />
+                <label className="form-label">Rank</label>
+                <input type="text" name="rank" className="form-input" value={formData.designation} onChange={(e) => setFormData({...formData, designation: e.target.value})} placeholder="e.g. IPS, PPS" required />
               </div>
 
               <div>
-                <label className="form-label">Reporting Authority (User ID)</label>
-                <input type="text" name="reporting_authority_user_id" className="form-input" value={formData.reporting_authority_user_id} onChange={handleInputChange} placeholder="Leave blank if none" />
+                <label className="form-label">District Name</label>
+                <select 
+                  className="form-input" 
+                  onChange={(e) => {
+                    const selectedName = e.target.value;
+                    const code = selectedName.substring(0, 3).toUpperCase();
+                    setFormData({...formData, district_id: code});
+                  }}
+                >
+                  <option value="">Select District (or HQ)</option>
+                  <option value="Lucknow">Lucknow</option>
+                  <option value="Kanpur">Kanpur</option>
+                  <option value="Agra">Agra</option>
+                  <option value="Varanasi">Varanasi</option>
+                  <option value="Prayagraj">Prayagraj</option>
+                  <option value="Headquarters">Headquarters (All UP)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="form-label">District Code</label>
+                <input type="text" name="district_id" className="form-input" value={formData.district_id} readOnly style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)' }} />
+              </div>
+
+              <div>
+                <label className="form-label">CUG Mobile Number</label>
+                <input type="text" name="mobile_number" className="form-input" value={formData.mobile_number} onChange={handleInputChange} placeholder="e.g. 9454400000" required />
+              </div>
+
+              <div>
+                <label className="form-label">Official Email</label>
+                <input type="email" name="email" className="form-input" value={formData.email} onChange={handleInputChange} placeholder="e.g. sp.lko@uppolice.gov.in" required />
               </div>
 
               <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>
