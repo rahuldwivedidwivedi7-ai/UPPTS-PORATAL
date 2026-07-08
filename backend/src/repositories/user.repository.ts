@@ -19,6 +19,7 @@ export interface UserRow {
   status: 'ACTIVE' | 'INACTIVE' | 'LOCKED';
   failed_login_attempts: number;
   lockout_until: Date | null;
+  force_password_change?: boolean;
   address?: string | null;
   aadhaar_number?: string | null;
   emergency_contact?: string | null;

@@ -10,8 +10,8 @@ const router = Router();
 // Protect all approval endpoints by authMiddleware
 router.use(authMiddleware);
 
-// Only administrative SP/ADG reviewers can access approvals
-router.use(authorizeRoles('DISTRICT_SP', 'SP_COMPUTER_CENTRE', 'ADG_TECHNICAL_SERVICES'));
+// Only administrative reviewers can access approvals
+router.use(authorizeRoles('DISTRICT_ADMIN', 'DISTRICT_SP', 'TS_UPCC_ADMIN', 'TS_UPCC_SP', 'TS_DIG_IG', 'TSHQ_ADMIN', 'ADG_TS'));
 
 // Get list of requests awaiting action for current reviewer
 router.get(

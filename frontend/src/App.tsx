@@ -3,10 +3,10 @@ import { LoginScreen } from './components/LoginScreen.js';
 import { RegisterScreen } from './components/RegisterScreen.js';
 import { ForgotPasswordScreen } from './components/ForgotPasswordScreen.js';
 import { OperatorDashboard } from './components/OperatorDashboard.js';
-import { ReviewerDashboard } from './components/ReviewerDashboard.js';
-import { AdminDashboard } from './components/AdminDashboard.js';
+import { AuthorityDashboard } from './components/AuthorityDashboard.js';
 import SuperAdminDashboard from './components/admin/SuperAdminDashboard.js';
 import { LandingPage } from './components/LandingPage.js';
+import ForcePasswordReset from './components/ForcePasswordReset.js';
 import { LogOut, User } from 'lucide-react';
 
 interface UserSession {
@@ -15,11 +15,13 @@ interface UserSession {
   role: string;
   name: string;
   district_id: string | null;
+  force_password_change?: boolean;
 }
 
 export const App: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<UserSession | null>(null);
+  const [forcePasswordReset, setForcePasswordReset] = useState<boolean>(false);
 
   // Check localStorage on application startup
   useEffect(() => {
@@ -34,8 +36,15 @@ export const App: React.FC = () => {
 
   // Handle complete successful login
   const handleLoginSuccess = (newToken: string, newUser: UserSession) => {
+    if (newUser.force_password_change) {
+      setToken(newToken);
+      setUser(newUser);
+      setForcePasswordReset(true);
+      return;
+    }
     setToken(newToken);
     setUser(newUser);
+    setForcePasswordReset(false);
     localStorage.setItem('upp_session_token', newToken);
     localStorage.setItem('upp_session_user', JSON.stringify(newUser));
   };
@@ -85,6 +94,16 @@ export const App: React.FC = () => {
         onBackToHome={() => setAuthMode('LANDING')}
       />
     );
+  }
+
+  // Show Force Password Reset if required
+  if (forcePasswordReset) {
+    return <ForcePasswordReset user={user!} token={token!} onComplete={() => {
+      setForcePasswordReset(false);
+      setUser({...user!, force_password_change: false});
+      localStorage.setItem('upp_session_token', token!);
+      localStorage.setItem('upp_session_user', JSON.stringify({...user!, force_password_change: false}));
+    }} />;
   }
 
   // Render respective dashboards based on role
@@ -172,12 +191,10 @@ export const App: React.FC = () => {
         <SuperAdminDashboard />
       ) : (
         <main style={{ padding: '0 20px 40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-          {user.role === 'COMPUTER_OPERATOR' ? (
+          {user.role === 'APPLICANT' ? (
             <OperatorDashboard token={token} />
-          ) : user.role === 'ADMIN' ? (
-            <AdminDashboard token={token} />
           ) : (
-            <ReviewerDashboard token={token} role={user.role} />
+            <AuthorityDashboard token={token} role={user.role} />
           )}
         </main>
       )}

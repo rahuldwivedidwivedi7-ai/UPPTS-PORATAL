@@ -8,8 +8,8 @@ export const adminController = {
    */
   async getStats(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user || (req.user.role !== 'ADMIN' && req.user.role !== 'SUPER_ADMIN')) {
-        throw new UnauthorizedError('Access denied: Administrator permissions required.');
+      if (req.user?.role !== 'SUPER_ADMIN') {
+        throw new UnauthorizedError('Access Denied');
       }
 
       const stats = await adminRepository.getStats();
@@ -29,8 +29,8 @@ export const adminController = {
    */
   async getAuditLogs(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user || (req.user.role !== 'ADMIN' && req.user.role !== 'SUPER_ADMIN')) {
-        throw new UnauthorizedError('Access denied: Administrator permissions required.');
+      if (req.user?.role !== 'SUPER_ADMIN') {
+        throw new UnauthorizedError('Access Denied');
       }
 
       const logs = await adminRepository.getAuditLogs();
@@ -51,7 +51,7 @@ export const adminController = {
    */
   async updateServiceInfo(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user || (req.user.role !== 'ADMIN' && req.user.role !== 'SUPER_ADMIN')) {
+      if (req.user?.role !== 'SUPER_ADMIN') {
         throw new UnauthorizedError('Access denied: Administrator permissions required.');
       }
       const { userId } = req.params;
@@ -85,7 +85,7 @@ export const adminController = {
    */
   async verifyDocument(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.user || (req.user.role !== 'ADMIN' && req.user.role !== 'SUPER_ADMIN')) {
+      if (req.user?.role !== 'SUPER_ADMIN') {
         throw new UnauthorizedError('Access denied: Administrator permissions required.');
       }
       

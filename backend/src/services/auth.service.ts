@@ -66,9 +66,24 @@ export const authService = {
         username: user.username,
         role: user.role,
         name: user.full_name || user.username,
-        district_id: user.district_id
+        district_id: user.district_id,
+        force_password_change: user.force_password_change
       }
     };
+  },
+
+  /**
+   * Change user password and clear force_password_change flag
+   */
+  async changePassword(userId: string, newPassword: string, clientIp: string): Promise<void> {
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    const conn = await db.getClient();
+    try {
+      await conn.query('UPDATE users SET password_hash = ?, force_password_change = FALSE WHERE user_id = ?', [passwordHash, userId]);
+      auditLogger.log(userId, 'PASSWORD_CHANGE', `User changed password successfully`, clientIp);
+    } finally {
+      conn.release();
+    }
   },
 
   /**

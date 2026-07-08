@@ -5,12 +5,12 @@
   "description": "UP Police Technical Services Headquarters Transfer Management System Backend",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "node node_modules/typescript/bin/tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon --watch src -e ts,json --exec ts-node src/server.ts",
-    "setup-db": "ts-node src/migrations/create-db.ts",
-    "migrate": "ts-node src/migrations/run-migrations.ts",
-    "seed": "ts-node src/migrations/run-seed.ts"
+    "dev": "node node_modules/tsx/dist/cli.mjs watch src/server.ts",
+    "setup-db": "node node_modules/tsx/dist/cli.mjs src/migrations/create-db.ts",
+    "migrate": "node node_modules/tsx/dist/cli.mjs src/migrations/run-migrations.ts",
+    "seed": "node node_modules/tsx/dist/cli.mjs src/migrations/run-seed.ts"
   },
   "keywords": [],
   "author": "Senior Software Architect",
@@ -24,7 +24,7 @@
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.13",
+    "nodemailer": "^6.10.1",
     "pg": "^8.22.0",
     "zod": "^3.23.8"
   },
@@ -35,10 +35,11 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/multer": "^1.4.11",
     "@types/node": "^20.12.7",
-    "@types/nodemailer": "^6.4.15",
+    "@types/nodemailer": "^6.4.24",
     "@types/pg": "^8.20.0",
     "nodemon": "^3.1.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.23.0",
     "typescript": "^5.4.5"
   }
 }

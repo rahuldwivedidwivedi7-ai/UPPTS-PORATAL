@@ -11,26 +11,28 @@ export const approvalService = {
    * Get all pending transfer requests awaiting action for the logged-in administrative reviewer
    */
   async getPendingRequests(userId: string, role: string, districtId: string | null) {
-    if (role === 'ADMIN') {
-      return await approvalRepository.findPendingByStage('ADMIN_VERIFICATION');
+    if (role === 'DISTRICT_ADMIN') {
+      if (!districtId) throw new AppError('District Admin must have an assigned district.', 400);
+      return await approvalRepository.findPendingByStage('DISTRICT_ADMIN_SCRUTINY', districtId);
     }
     if (role === 'DISTRICT_SP') {
-      if (!districtId) {
-        throw new AppError('District SP must have a assigned jurisdiction district ID.', 400);
-      }
+      if (!districtId) throw new AppError('District SP must have an assigned district.', 400);
       return await approvalRepository.findPendingByStage('DISTRICT_SP_APPROVAL', districtId);
     }
-    if (role === 'SP_COMPUTER_CENTRE') {
-      return await approvalRepository.findPendingByStage('SP_UPPCC_APPROVAL');
+    if (role === 'TS_UPCC_ADMIN') {
+      return await approvalRepository.findPendingByStage('TS_ADMIN_VERIFICATION');
     }
-    if (role === 'IG_TECHNICAL_SERVICES') {
-      return await approvalRepository.findPendingByStage('IG_TS_APPROVAL');
+    if (role === 'TS_UPCC_SP') {
+      return await approvalRepository.findPendingByStage('SP_TS_APPROVAL');
     }
-    if (role === 'HQ_REVIEWER') {
-      return await approvalRepository.findPendingByStage('HQ_REVIEW');
+    if (role === 'TS_DIG_IG') {
+      return await approvalRepository.findPendingByStage('DIG_IG_APPROVAL');
     }
-    if (role === 'ADG_TECHNICAL_SERVICES') {
-      return await approvalRepository.findPendingByStage('FINAL_APPROVAL');
+    if (role === 'TSHQ_ADMIN') {
+      return await approvalRepository.findPendingByStage('TSHQ_ADMIN_SCRUTINY');
+    }
+    if (role === 'ADG_TS') {
+      return await approvalRepository.findPendingByStage('ADG_FINAL_DECISION');
     }
 
     throw new ForbiddenError('Access denied: You are not authorized to view pending reviews.');

@@ -9,7 +9,7 @@ const router = Router();
 router.use(authMiddleware);
 
 // Only Super Admin role is permitted
-router.use(authorizeRoles('ADMIN', 'SUPER_ADMIN'));
+router.use(authorizeRoles('SUPER_ADMIN'));
 
 // Get system metrics dashboard
 router.get(

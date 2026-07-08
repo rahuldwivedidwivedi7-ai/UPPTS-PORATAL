@@ -38,4 +38,11 @@ router.post(
   authController.logout
 );
 
+// Protected change password route
+router.post(
+  '/change-password',
+  authMiddleware,
+  authController.changePassword
+);
+
 export default router;

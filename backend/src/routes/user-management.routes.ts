@@ -22,9 +22,9 @@ const excelUpload = multer({
 
 const router = Router();
 
-// All user management routes require authentication and SUPER_ADMIN or ADMIN role
+// All user management routes require authentication and SUPER_ADMIN role
 router.use(authMiddleware);
-router.use(authorizeRoles('SUPER_ADMIN', 'ADMIN'));
+router.use(authorizeRoles('SUPER_ADMIN'));
 
 router.get('/export', userManagementController.exportUsers);
 router.get('/import/template', userManagementController.downloadTemplate);

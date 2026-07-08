@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import { ApplicationWorkflowTracker } from './ApplicationWorkflowTracker';
 
-interface ReviewerDashboardProps {
+interface AuthorityDashboardProps {
   token: string;
   role: string;
 }
@@ -54,9 +54,10 @@ interface PendingRequest {
   documents?: DocumentRow[];
 }
 
-export const ReviewerDashboard: React.FC<ReviewerDashboardProps> = ({ token, role }) => {
+export const AuthorityDashboard: React.FC<AuthorityDashboardProps> = ({ token, role }) => {
   const [pendingRequests, setPendingRequests] = useState<PendingRequest[]>([]);
   const [selectedRequest, setSelectedRequest] = useState<PendingRequest | null>(null);
+  const [activeTab, setActiveTab] = useState<'PENDING' | 'PROCESSED'>('PENDING');
   
   // Helper: Get status badge styles
   const getStatusStyle = (status: string) => {
@@ -169,22 +170,13 @@ export const ReviewerDashboard: React.FC<ReviewerDashboardProps> = ({ token, rol
 
   // Helper: Get label translation for action buttons
   const getActionLabels = () => {
-    if (role === 'ADMIN') {
+    if (role === 'DISTRICT_ADMIN' || role === 'TS_UPCC_ADMIN' || role === 'TSHQ_ADMIN') {
       return { approveAction: 'VERIFY' as const, approveText: 'Verify Application', approveIcon: <FileCheck size={16} /> };
     }
-    if (role === 'DISTRICT_SP') {
+    if (role === 'DISTRICT_SP' || role === 'TS_UPCC_SP' || role === 'TS_DIG_IG') {
       return { approveAction: 'RECOMMEND' as const, approveText: 'Recommend Transfer', approveIcon: <FileCheck size={16} /> };
     }
-    if (role === 'SP_COMPUTER_CENTRE') {
-      return { approveAction: 'RECOMMEND' as const, approveText: 'Verify & Forward (SP)', approveIcon: <FileCheck size={16} /> };
-    }
-    if (role === 'IG_TECHNICAL_SERVICES') {
-      return { approveAction: 'RECOMMEND' as const, approveText: 'Verify & Forward (IG)', approveIcon: <FileCheck size={16} /> };
-    }
-    if (role === 'HQ_REVIEWER') {
-      return { approveAction: 'RECOMMEND' as const, approveText: 'Recommend for Approval (HQ)', approveIcon: <FileCheck size={16} /> };
-    }
-    // ADG TS final role
+    // ADG_TS final role
     return { approveAction: 'APPROVE' as const, approveText: 'Final Approve', approveIcon: <Award size={16} /> };
   };
 
@@ -275,75 +267,63 @@ export const ReviewerDashboard: React.FC<ReviewerDashboardProps> = ({ token, rol
       )}
 
       {/* Grid Layout: Pending queue and Detailed inspect panels */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-        gap: '32px',
-        alignItems: 'start'
-      }}>
-        
-        {/* Left Column: Pending Reviews Queue */}
-        <div className="glass-panel" style={{ padding: '32px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-            <h3 style={{ fontSize: '1.25rem', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Shield size={20} style={{ color: 'var(--primary)' }} />
-              Pending Actions Queue
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '24px' }}>
+        {/* Left Column: List */}
+        <div className="glass-panel" style={{ height: 'calc(100vh - 200px)', overflowY: 'auto' }}>
+          <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border-color)', position: 'sticky', top: 0, backgroundColor: 'rgba(15, 23, 42, 0.95)', backdropFilter: 'blur(10px)', zIndex: 10 }}>
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'white' }}>
+              {activeTab === 'PENDING' ? 'Requires Action' : 'Previously Processed'}
             </h3>
-            <button 
-              onClick={fetchPendingRequests} 
-              className="text-muted" 
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px' }}
-              title="Refresh List"
-            >
-              <RefreshCw size={16} className={fetching ? 'animate-spin' : ''} style={{ animation: fetching ? 'spin 1s linear infinite' : 'none' }} />
-            </button>
           </div>
 
-          {fetching ? (
-            <div className="text-center text-muted" style={{ padding: '20px' }}>
-              Loading pending requests...
-            </div>
-          ) : pendingRequests.length === 0 ? (
-            <div className="text-center text-muted" style={{ padding: '40px' }}>
-              No pending applications in your review stage pipeline.
-            </div>
+          {activeTab === 'PENDING' ? (
+            pendingRequests.length === 0 ? (
+              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                <CheckCircle size={32} style={{ margin: '0 auto 12px auto', opacity: 0.3, color: '#10b981' }} />
+                No pending requests in your queue.
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                {pendingRequests.map(request => (
+                  <div 
+                    key={request.request_id}
+                    onClick={() => fetchRequestDetails(request.request_id)}
+                    style={{ 
+                      padding: '16px 20px',
+                      borderBottom: '1px solid var(--border-color)',
+                      cursor: 'pointer',
+                      backgroundColor: selectedRequest?.request_id === request.request_id ? 'rgba(88, 101, 242, 0.1)' : 'transparent',
+                      borderLeft: selectedRequest?.request_id === request.request_id ? '3px solid var(--primary)' : '3px solid transparent',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontWeight: 600, color: 'white', fontSize: '0.95rem' }}>{request.operator_name}</span>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                        {new Date(request.application_date || request.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                    
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                      {request.operator_designation} • {request.source_district_name}
+                    </div>
+                    
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <span style={{ 
+                        padding: '2px 8px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 600,
+                        background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6'
+                      }}>
+                        {request.transfer_category.replace(/_/g, ' ')}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxHeight: '500px', overflowY: 'auto', paddingRight: '8px' }}>
-              {pendingRequests.map(req => (
-                <div 
-                  key={req.request_id}
-                  className="glass-panel"
-                  style={{
-                    padding: '16px 20px',
-                    cursor: 'pointer',
-                    border: selectedRequest?.request_id === req.request_id 
-                      ? '1px solid var(--primary)' 
-                      : '1px solid var(--border-color)',
-                    transition: 'all 0.2s',
-                    backgroundColor: selectedRequest?.request_id === req.request_id
-                      ? 'rgba(88, 101, 242, 0.05)'
-                      : 'rgba(17, 25, 40, 0.45)'
-                  }}
-                  onClick={() => fetchRequestDetails(req.request_id)}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--accent-blue)' }}>
-                      {req.transfer_category.replace(/_/g, ' ')}
-                    </span>
-                    <span className="text-muted" style={{ fontSize: '0.7rem' }}>
-                      {req.application_date ? new Date(req.application_date).toLocaleDateString() : 'N/A'}
-                    </span>
-                  </div>
-                  
-                  <div style={{ fontSize: '0.925rem', color: 'white', fontWeight: 600, marginBottom: '4px' }}>
-                    {req.operator_name} ({req.operator_grade.replace(/_/g, ' ')})
-                  </div>
-                  
-                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
-                    Origin: {req.source_district_name} &rarr; Prefs: {req.preference_1_district_name}{req.preference_2_district_name ? `, ${req.preference_2_district_name}` : ''}{req.preference_3_district_name ? `, ${req.preference_3_district_name}` : ''}
-                  </div>
-                </div>
-              ))}
+            <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+              <FileText size={32} style={{ margin: '0 auto 12px auto', opacity: 0.3 }} />
+              Processed applications will appear here.
             </div>
           )}
         </div>

@@ -357,20 +357,19 @@ const UserManagement: React.FC = () => {
               <div>
                 <label className="form-label">District Name</label>
                 <select 
+                  name="district_id"
                   className="form-input" 
-                  onChange={(e) => {
-                    const selectedName = e.target.value;
-                    const code = selectedName.substring(0, 3).toUpperCase();
-                    setFormData({...formData, district_id: code});
-                  }}
+                  value={formData.district_id}
+                  onChange={handleInputChange}
                 >
                   <option value="">Select District (or HQ)</option>
-                  <option value="Lucknow">Lucknow</option>
-                  <option value="Kanpur">Kanpur</option>
-                  <option value="Agra">Agra</option>
-                  <option value="Varanasi">Varanasi</option>
-                  <option value="Prayagraj">Prayagraj</option>
-                  <option value="Headquarters">Headquarters (All UP)</option>
+                  <option value="e7d3b10b-0dbd-43cf-bc8b-cf4a85208f2a">Lucknow</option>
+                  <option value="a4a9db98-0f0e-4ab8-9104-9444bb21f37e">Kanpur Nagar</option>
+                  <option value="f4534f3b-fa0c-4fa8-bc1c-cfdf47ea87c0">Gorakhpur</option>
+                  <option value="b45efba3-a4c0-482a-a92c-15a452ef72cd">Varanasi</option>
+                  <option value="c89dfae2-402a-43df-bc7a-594248ef72ba">Prayagraj</option>
+                  <option value="d78cfba1-8f0a-429a-9e12-429a98ef72be">Ghaziabad</option>
+                  <option value="">Headquarters (All UP)</option>
                 </select>
               </div>
 

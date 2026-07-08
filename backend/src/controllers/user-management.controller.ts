@@ -45,7 +45,7 @@ export const userManagementController = {
     try {
       const { 
         full_name, pno_number, username, password, email, mobile_number, 
-        designation, role, district_id, reporting_authority_user_id 
+        designation, role, district_id, reporting_authority_user_id, rank
       } = req.body;
 
       // 1. Validation
@@ -76,24 +76,28 @@ export const userManagementController = {
         // Create user record directly without personnel record
         const userQuery = `
           INSERT INTO users (
-            user_id, personnel_id, district_id, username, pno_number, full_name, father_name, dob, gender, \`rank\`, posting_district, password_hash, email, mobile_number, role, reporting_authority_user_id
-          ) VALUES (?, NULL, ?, ?, ?, ?, 'N/A', '1980-01-01', 'MALE', ?, ?, ?, ?, ?, ?, ?)
+            user_id, personnel_id, district_id, username, pno_number, full_name, father_name, dob, gender, \`rank\`, posting_district, password_hash, email, mobile_number, role, reporting_authority_user_id, force_password_change
+          ) VALUES (?, NULL, ?, ?, NULL, ?, NULL, NULL, NULL, ?, ?, ?, ?, ?, ?, ?, TRUE)
         `;
         
-        const fallbackEmail = email || `${username}@upp.gov.in`;
-        const fallbackMobile = mobile_number || Math.floor(1000000000 + Math.random() * 9000000000).toString();
-
         await conn.query(userQuery, [
-          userId, district_id || null, username, pno_number || username, 
-          full_name, designation || role, district_id || 'HQ', password_hash, 
-          fallbackEmail, fallbackMobile, role, reporting_authority_user_id || null
+          userId, district_id || null, username, 
+          full_name, designation || rank || role, district_id || 'HQ', password_hash, 
+          email, mobile_number, role, reporting_authority_user_id || null
         ]);
 
         await conn.commit();
 
+        // Send Welcome Email
+        import('../services/email.service.js').then(module => {
+          module.sendWelcomeEmail(email, full_name, username, password).catch(e => {
+            console.error('Failed to send email async:', e);
+          });
+        }).catch(e => console.error('Failed to load email service:', e));
+
         res.status(201).json({
           success: true,
-          message: 'User created successfully',
+          message: 'User created successfully. Credentials sent via email.',
           data: { user_id: userId, username, role }
         });
       } catch (err) {
