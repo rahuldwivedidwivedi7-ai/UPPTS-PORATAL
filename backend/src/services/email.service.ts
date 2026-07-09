@@ -4,10 +4,14 @@ import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp.ethereal.email',
   port: parseInt(process.env.SMTP_PORT || '587', 10),
+  secure: process.env.SMTP_PORT === '465', // true for 465, false for other ports
   auth: {
     user: process.env.SMTP_USER || 'test@ethereal.email',
     pass: process.env.SMTP_PASS || 'password',
   },
+  tls: {
+    rejectUnauthorized: false
+  }
 });
 
 export const sendWelcomeEmail = async (
@@ -18,7 +22,7 @@ export const sendWelcomeEmail = async (
 ): Promise<void> => {
   try {
     const info = await transporter.sendMail({
-      from: '"UP Police Transfer System" <no-reply@uppolice.gov.in>',
+      from: process.env.SMTP_FROM || '"UP Police Transfer System" <no-reply@uppolice.gov.in>',
       to: email,
       subject: 'Welcome to UPPTS - Your Authority Account Credentials',
       text: `Dear ${designation},
