@@ -108,6 +108,17 @@ export const userManagementController = {
       }
     } catch (error: any) {
       console.error('Error creating user:', error);
+      if (error.code === '23505') {
+        let field = 'Field';
+        if (error.constraint === 'users_email_key' || error.message.includes('email')) field = 'Email ID';
+        else if (error.constraint === 'users_mobile_number_key' || error.message.includes('mobile_number')) field = 'Mobile Number';
+        else if (error.constraint === 'users_username_key' || error.message.includes('username')) field = 'Username';
+        
+        return res.status(409).json({ 
+          success: false, 
+          message: `${field} is already in use by another authority.` 
+        });
+      }
       res.status(500).json({ success: false, message: 'Internal server error' });
     }
   },
