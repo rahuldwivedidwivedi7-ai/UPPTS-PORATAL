@@ -48,6 +48,8 @@ Technical Services HQ`,
             <p><strong>Password:</strong> ${plainPassword}</p>
           </div>
           
+          <p>You can log in to the portal here: <a href="https://etransfer-uppts.vercel.app">https://etransfer-uppts.vercel.app</a></p>
+
           <p style="color: #d32f2f; font-weight: bold;">
             Important: For security reasons, you will be required to change your password immediately upon your first login.
           </p>
