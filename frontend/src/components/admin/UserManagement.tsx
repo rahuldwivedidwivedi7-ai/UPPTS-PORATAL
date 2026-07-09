@@ -169,6 +169,29 @@ const UserManagement: React.FC = () => {
     }
   };
 
+  const handleDeleteUser = async (userId: string, username: string) => {
+    if (!window.confirm(`Are you sure you want to completely delete user '${username}'? This action cannot be undone.`)) {
+      return;
+    }
+    
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users/${userId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message || 'Failed to delete user');
+      }
+      
+      setUsers(users.filter(u => u.user_id !== userId));
+      alert(`User '${username}' deleted successfully.`);
+    } catch (err: any) {
+      alert(err.message || 'An error occurred while deleting');
+    }
+  };
+
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
@@ -289,8 +312,21 @@ const UserManagement: React.FC = () => {
                           {user.status}
                         </span>
                       </td>
-                      <td style={{ padding: '12px 16px', textAlign: 'right' }}>
-                        <button onClick={() => openEditModal(user)} style={{ background: 'transparent', border: 'none', color: 'var(--primary)', cursor: 'pointer', marginRight: '12px' }}>Edit</button>
+                      <td style={{ padding: '12px 16px' }}>
+                        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                          <button 
+                            onClick={() => openEditModal(user)}
+                            style={{ background: 'transparent', border: 'none', color: 'var(--primary)', cursor: 'pointer', fontWeight: '500' }}
+                          >
+                            Edit
+                          </button>
+                          <button 
+                            onClick={() => handleDeleteUser(user.user_id, user.username)}
+                            style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', fontWeight: '500' }}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
