@@ -175,6 +175,7 @@ const UserManagement: React.FC = () => {
     }
     
     try {
+      const token = localStorage.getItem('upp_session_token');
       const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/v1/users/${userId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
